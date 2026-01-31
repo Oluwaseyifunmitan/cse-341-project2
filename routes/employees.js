@@ -4,14 +4,56 @@ const routes = require("express").Router();
 const employeesController = require("../controllers/employee");
 const validation = require('../middleware/validate');
 
-routes.get("/", employeesController.getAll);
+routes.get('/', async (req, res, next) => {
+  try {
+    await employeesController.getAll(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
 
-routes.get("/:id", employeesController.getSingle);
+// GET single employee
+routes.get('/:id', async (req, res, next) => {
+  try {
+    await employeesController.getSingle(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
 
-routes.post("/", validation.saveEmployee,employeesController.createEmployee);
+// CREATE employee
+routes.post(
+  '/',
+  validation.saveEmployee,
+  async (req, res, next) => {
+    try {
+      await employeesController.createEmployee(req, res);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-routes.put("/:id", validation.saveEmployee,employeesController.updateEmployee);
+// UPDATE employee
+routes.put(
+  '/:id',
+  validation.saveEmployee,
+  async (req, res, next) => {
+    try {
+      await employeesController.updateEmployee(req, res);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-routes.delete("/:id", employeesController.deleteEmployee);
+// DELETE employee
+routes.delete('/:id', async (req, res, next) => {
+  try {
+    await employeesController.deleteEmployee(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = routes;

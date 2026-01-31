@@ -3,28 +3,59 @@ const routes = require("express").Router();
 
 const inventoryController = require("../controllers/inventory");
 const validation = require('../middleware/validate');
-const asyncHandler = require('../helpers/asyncHandler');
 
-routes.get("/", asyncHandler(inventoryController.getAll));
 
-routes.get("/:id", asyncHandler(inventoryController.getSingle));
+routes.get('/', async (req, res, next) => {
+  try {
+    await inventoryController.getAll(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
 
+// GET single inventory
+routes.get('/:id', async (req, res, next) => {
+  try {
+    await inventoryController.getSingle(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// CREATE inventory
 routes.post(
-  "/",
+  '/',
   validation.saveInventory,
-  asyncHandler(inventoryController.createInventory)
+  async (req, res, next) => {
+    try {
+      await inventoryController.createInventory(req, res);
+    } catch (error) {
+      next(error);
+    }
+  }
 );
 
+// UPDATE inventory
 routes.put(
-  "/:id",
+  '/:id',
   validation.saveInventory,
-  asyncHandler(inventoryController.updateInventory)
+  async (req, res, next) => {
+    try {
+      await inventoryController.updateInventory(req, res);
+    } catch (error) {
+      next(error);
+    }
+  }
 );
 
-routes.delete(
-  "/:id",
-  asyncHandler(inventoryController.deleteInventory)
-);
+// DELETE inventory
+routes.delete('/:id', async (req, res, next) => {
+  try {
+    await inventoryController.deleteInventory(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
 
 
 module.exports = routes;
