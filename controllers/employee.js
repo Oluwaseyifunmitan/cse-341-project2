@@ -50,7 +50,7 @@ const createEmployee = async (req, res) => {
     res
       .status(500)
       .json(
-        response.error || "Some error occurred while creating the contact.",
+        response.error || "Some error occurred while creating the employee",
       );
   }
 };
@@ -81,7 +81,7 @@ const updateEmployee = async (req, res) => {
     res
       .status(500)
       .json(
-        response.error || "Some error occurred while updating the contact.",
+        response.error || "Some error occurred while updating the employee",
       );
   }
 };
@@ -99,7 +99,7 @@ const deleteEmployee = async (req, res) => {
     if (response.deletedCount === 1) {
       return res.status(204).send();
     } else {
-      return res.status(404).json({ message: "Contact not found" });
+      return res.status(404).json({ message: "Employee not found" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

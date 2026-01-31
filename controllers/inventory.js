@@ -48,7 +48,7 @@ const createInventory = async (req, res) => {
     res
       .status(500)
       .json(
-        response.error || "Some error occurred while creating the contact.",
+        response.error || "Some error occurred while creating the Inventory .",
       );
   }
 };
@@ -77,7 +77,7 @@ const updateInventory = async (req, res) => {
     res
       .status(500)
       .json(
-        response.error || "Some error occurred while updating the contact.",
+        response.error || "Some error occurred while updating the Inventory .",
       );
   }
 };
@@ -95,7 +95,7 @@ const deleteInventory = async (req, res) => {
     if (response.deletedCount === 1) {
       return res.status(204).send();
     } else {
-      return res.status(404).json({ message: "Contact not found" });
+      return res.status(404).json({ message: "Inventory not found" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });

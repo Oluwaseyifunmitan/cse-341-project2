@@ -3,15 +3,28 @@ const routes = require("express").Router();
 
 const inventoryController = require("../controllers/inventory");
 const validation = require('../middleware/validate');
+const asyncHandler = require('../helpers/asyncHandler');
 
-routes.get("/", inventoryController.getAll);
+routes.get("/", asyncHandler(inventoryController.getAll));
 
-routes.get("/:id", inventoryController.getSingle);
+routes.get("/:id", asyncHandler(inventoryController.getSingle));
 
-routes.post("/", validation.saveInventory,inventoryController.createInventory);
+routes.post(
+  "/",
+  validation.saveInventory,
+  asyncHandler(inventoryController.createInventory)
+);
 
-routes.put("/:id", validation.saveInventory,inventoryController.updateInventory);
+routes.put(
+  "/:id",
+  validation.saveInventory,
+  asyncHandler(inventoryController.updateInventory)
+);
 
-routes.delete("/:id", inventoryController.deleteInventory);
+routes.delete(
+  "/:id",
+  asyncHandler(inventoryController.deleteInventory)
+);
+
 
 module.exports = routes;

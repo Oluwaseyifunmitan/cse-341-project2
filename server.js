@@ -1,6 +1,7 @@
 const express = require("express");
 const mongodb = require("./data/database");
 const bodyParser = require('body-parser');
+const errorHandler = require('./middleware/errorHandler');
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.use("/", require("./routes"));
 process.on('uncaughtException', (err, origin) => {
   console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
 });
+app.use(errorHandler);
 
 mongodb.initDb((err) => {
   if (err) {
