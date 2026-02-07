@@ -32,7 +32,7 @@ app.use(cors({origin: '*'}))
 
 app.use("/", require("./routes"));
 passport.use(
-  new GitHubStrategy(
+  new GithubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
