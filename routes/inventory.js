@@ -3,6 +3,7 @@ const routes = require("express").Router();
 
 const inventoryController = require("../controllers/inventory");
 const validation = require('../middleware/validate');
+const auth =require('../middleware/authenticate');
 
 
 routes.get('/', async (req, res, next) => {
@@ -25,7 +26,7 @@ routes.get('/:id', async (req, res, next) => {
 // CREATE inventory
 routes.post(
   '/',
-  validation.saveInventory,
+  auth.isAuthenticated,validation.saveInventory,
   async (req, res, next) => {
     try {
       await inventoryController.createInventory(req, res);
@@ -38,7 +39,7 @@ routes.post(
 // UPDATE inventory
 routes.put(
   '/:id',
-  validation.saveInventory,
+ auth.isAuthenticated, validation.saveInventory,
   async (req, res, next) => {
     try {
       await inventoryController.updateInventory(req, res);
@@ -49,7 +50,7 @@ routes.put(
 );
 
 // DELETE inventory
-routes.delete('/:id', async (req, res, next) => {
+routes.delete('/:id',auth.isAuthenticated, async (req, res, next) => {
   try {
     await inventoryController.deleteInventory(req, res);
   } catch (error) {

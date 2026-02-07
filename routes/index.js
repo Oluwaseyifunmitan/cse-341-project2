@@ -1,10 +1,21 @@
-const routes = require("express").Router();
+const passport = require("passport");
 
+const routes = require("express").Router();
 
 routes.use("/", require("./swagger"));
 
-
 routes.use("/employees", require("./employees"));
 routes.use("/inventory", require("./inventory"));
-
+routes.get(
+  "/login",
+  passport.authenticate("github", (res, req) => {}),
+);
+routes.get("/logout", function (res, req, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 module.exports = routes;

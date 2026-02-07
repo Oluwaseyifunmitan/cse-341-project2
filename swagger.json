@@ -77,6 +77,9 @@
           "201": {
             "description": "Created"
           },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -152,6 +155,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -231,6 +237,9 @@
           "201": {
             "description": "Created"
           },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -300,6 +309,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
