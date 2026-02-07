@@ -58,7 +58,7 @@ passport.use(
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-app.get('/', (req,res)=> {res.send(req.session.user !== undefined? `Logged in as ${req.session.user.displayNaame}`:"Logged Out")});
+app.get('/', (req,res)=> {res.send(req.session.user !== undefined? `Logged in as ${req.session.user.displayName}`:"Logged Out")});
 
 app.get('/auth/github/callback', passport.authenticate('github',{
   failureRedirect: '/api-docs', session: false
